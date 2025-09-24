@@ -8,17 +8,16 @@
 ## Introduction
 
 ### Purpose  
-This document outlines the system analysis for a university process management system. The goal is to improve system tasks such as:  
-- Applying to the university  
-- Scheduling classes  
-- Withdrawing from a class  
-- Final grade submission  
-- Changing majors  
-- Viewing transcripts  
-- Graduation  
+This document outlines the system analysis for an online auction platform called UD Treasure Trove. The system allows users to create accounts, log in, list items for auction, browse and select active auctions, and place bids in real-time. The goal is to provide a secure, interactive platform for users to participate in auctions efficiently.
 
 ### Scope  
-This document covers the system requirements, context diagrams, use case definitions, data dictionary, and process specification.
+This document covers the system requirements, context diagrams, use case definitions, data dictionary, and process specification for the UD Treasure Trove auction system. It focuses on the following core features:
+
+- User authentication and account management
+- Adding auction items
+- Viewing active auctions
+- Selecting an auction to view details
+- Placing bids
 
 ### Definitions & Acronyms  
 **DFD: Data Flow Diagram**  
@@ -37,7 +36,8 @@ A data dictionary is a collection of detailed information about the data element
 A process specification defines the logic, rules, and data flows involved in a specific process within a system. It provides a detailed description of how inputs are transformed into outputs.  
 
 ### References  
-- University of Dayton system requirements  
+- UD Treasure Trove Project Requirements
+- IEEE Software Engineering Standards for Requirements Documentation 
 
 ### Overview  
 This document provides:  
@@ -49,14 +49,14 @@ This document provides:
 
 ---
 
-**CPS 310 - Phase 1 - System Overview & Use Cases**  
+**CPS 490 - Phase 0 - System Overview & Use Cases**  
 
 ---
 
 ## Overall Description
 
 ### Product Perspective  
-The system's goal is to interface with the student management and university databases that are currently in place. It will act as a focal point for managing administrative procedures for students.
+The system will operate as a web-based auction platform and interface with a backend database to store user accounts, auction items, bids, and bid histories. It will provide real-time updates for auctions and bids, ensuring all users see the latest bid information.
 
 ### Product Functions  
 - Applying to the university  
@@ -69,12 +69,14 @@ The system's goal is to interface with the student management and university dat
 - Dropping out of the university  
 
 ### User Characteristics  
-- **Students**: Primary users interacting with the system for academic management  
-- **Administrators**: Manage student records and approve requests  
-- **Professors**: Submit final grades  
+- **Users**: Primary actors who can create accounts, list items, browse auctions, and place bids.  
+- **Administrators**: Manage user accounts, oversee auctions, and ensure system integrity.
+- **System**: Automatically manages auction timing, bid validation, and real-time updates.
 
 ### Constraints  
-- Web-based with mobile compatibility  
+- Web-based with mobile compatibility
+- Real-time bid updates must be supported
+- Auctions cannot accept bids after the end time  
 
 ### Assumptions  
 - Users have basic technical proficiency  
@@ -85,25 +87,19 @@ The system's goal is to interface with the student management and university dat
 ## Systems Analysis
 
 ### Context Level Data Flow Diagram  
-The Context-Level Data Flow Diagram includes the main process representing the University's processing system. The entities include:  
-- **Students** – both enrolled and not yet enrolled  
-- **Faculty** – manage approvals and update records via the system  
-- **Staff** – store and retrieve records  
+The context-level DFD represents the auction system as a single process interacting with external entities:  
+- **Users** – browse auctions, place bids, and manage their accounts
+- **Administrators** – oversee the auction system and manage user accounts  
 
 ![Context Level DFD](Diagrams/ContextLevelDFD.png)  
 
 ---
 
 ### Entity-Relationship Diagram  
-The Entity-Relationship Diagram models the University Process Management System, capturing essential entities and their interactions. The primary entities include:  
-- **Student**  
-- **Graduation**  
-- **Transcript**  
-- **Major**  
-- **University**  
-- **Class**  
-- **Professor**  
-- **Faculty**  
+The Entity-Relationship Diagram models the auction system, capturing essential entities and their interactions. The primary entities include:  
+- **User**  
+- **Auction**  
+- **Bid**    
 
 Students interact with multiple processes through associative entities such as:  
 - **Graduation Status** – tracks eligibility for graduation  
