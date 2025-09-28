@@ -88,7 +88,7 @@ The system will operate as a web-based auction platform and interface with a bac
 ### Context Level Data Flow Diagram  
 The context-level DFD represents the auction system as a single process interacting with external entities:  
 - **Users** – browse auctions, place bids, and manage their accounts
-- **Administrators** – oversee the auction system and manage user accounts  
+- **System** – oversee the auction system and manage user accounts  
 
 ![Context Level DFD](Diagrams/ContextLevelDFD.drawio.png)  
 
@@ -117,7 +117,7 @@ Professors are affiliated with a faculty and take on teaching assignments for cl
 The following actors and processes are represented in the use case diagram:  
 
 - **User** – registers, logs in, adds auction items, views auctions, places bids  
-- **Administrator** – monitors system, manages user accounts 
+- **System** – monitors system, manages user accounts 
 
 ![Use Case Diagram](Diagrams/UseCaseDiagram.png)  
 
