@@ -59,14 +59,12 @@ This document provides:
 The system will operate as a web-based auction platform and interface with a backend database to store user accounts, auction items, bids, and bid histories. It will provide real-time updates for auctions and bids, ensuring all users see the latest bid information.
 
 ### Product Functions  
-- Applying to the university  
-- Scheduling classes  
-- Withdrawing from a class  
-- Final class grade submission  
-- Changing your major  
-- Viewing your transcript  
-- Graduation process  
-- Dropping out of the university  
+- User registration and authentication
+- Add auction item with title, description, and end time
+- View all active auctions
+- Select an auction to view details and bid history
+- Place bids using tokens or virtual currency
+- Display real-time countdown timers and bid updates
 
 ### User Characteristics  
 - **Users**: Primary actors who can create accounts, list items, browse auctions, and place bids.  
@@ -79,8 +77,9 @@ The system will operate as a web-based auction platform and interface with a bac
 - Auctions cannot accept bids after the end time  
 
 ### Assumptions  
-- Users have basic technical proficiency  
-- University maintains up-to-date records  
+- Users have basic computer proficiency and access to the internet
+- The database reliably stores user and auction information
+- System clock is synchronized for accurate countdown timers
 
 ---
 
@@ -117,32 +116,8 @@ Professors are affiliated with a faculty and take on teaching assignments for cl
 ### Use Case Diagram  
 The following actors and processes are represented in the use case diagram:  
 
-- **Student** – interacts with the system to:  
-    - View transcript  
-    - Apply to university  
-    - Change major  
-    - Complete the graduation process  
-    - Withdraw from a class  
-    - Schedule classes  
-
-- **Advisor** – communicates with the system to:  
-    - Schedule classes  
-    - Reference the teaching schedule form  
-
-- **Department** – manages the **teaching schedule form**  
-
-- **Teaching Schedule Form** – links to both the advisor and department  
-
-- **Professor** – interacts with the system to:  
-    - Submit final class grades  
-    - Withdraw from a class  
-    - Reference the teaching schedule form  
-
-- **Administrator** – manages key system processes:  
-    - Applying to university  
-    - Changing majors  
-    - Graduation process  
-    - Withdrawing from a class  
+- **User** – registers, logs in, adds auction items, views auctions, places bids  
+- **Administrator** – monitors system, manages user accounts 
 
 ![Use Case Diagram](Diagrams/UseCaseDiagram.png)  
 
