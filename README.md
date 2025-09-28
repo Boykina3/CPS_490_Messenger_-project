@@ -107,7 +107,7 @@ Students interact with multiple processes through associative entities such as:
 - **Schedule** – ensures students are properly registered for classes  
 - **Major Assignment** – assigns a major, connecting to both the university and the faculty responsible for the program  
 
-Professors are affiliated with a faculty and take on teaching assignments for classes, submitting grade submissions to evaluate student performance. Students apply to the university through the application process, which determines admission status.  
+
 
 ![Entity Relationship Diagram](Diagrams/ER%20Diagram.png)  
 
