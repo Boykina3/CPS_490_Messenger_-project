@@ -1,6 +1,7 @@
 # Systems Analysis Project
   
-**Anthony Boykin**  
+**Anthony Boykin** 
+**Nathan Hetman**
  
 
 ---
@@ -116,8 +117,8 @@ Students interact with multiple processes through associative entities such as:
 ### Use Case Diagram  
 The following actors and processes are represented in the use case diagram:  
 
-- **User** – registers, logs in, adds auction items, views auctions, places bids  
-- **System** – monitors system, manages user accounts 
+- **User** – registers, logs in, adds auction items, creates items title, items description, creates items end date for auction, views auctions, selects active auctions, places bids  
+- **System** – authenticates accounts, creates bid history, creates auction countdown, shows items title and description, creates tokens
 
 ![Use Case Diagram](Diagrams/UseCaseDiagram.png)  
 
