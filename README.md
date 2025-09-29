@@ -106,8 +106,7 @@ The Entity-Relationship Diagram models the auction system, capturing essential e
 
 
 User interact with multiple processes through associative entities such as:  
-- **User** – can create many Auctions.
-- **User** – can place many Bids.
+- **User** – can create many Auctions and can place many Bids.
 - **Auction** – can receive many Bids.  
 - **Bid** – generates one or more Transactions. 
 - **Bid_history** – can tracks all bids over time, linked to both User and Auction.
