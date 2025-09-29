@@ -100,18 +100,19 @@ The context-level DFD represents the auction system as a single process interact
 The Entity-Relationship Diagram models the auction system, capturing essential entities and their interactions. The primary entities include:  
 - **User**  
 - **Auction**  
-- **Bid**    
-
-Students interact with multiple processes through associative entities such as:  
-- **Graduation Status** – tracks eligibility for graduation  
-- **Grade Record** – associated with their transcript  
-- **Enrollment** – manages course participation  
-- **Schedule** – ensures students are properly registered for classes  
-- **Major Assignment** – assigns a major, connecting to both the university and the faculty responsible for the program  
+- **Bid** 
+- **Transaction**  
+- **Bid_history**  
 
 
+User interact with multiple processes through associative entities such as:  
+- **User** – can create many Auctions.
+- **User** – can place many Bids.
+- **Auction** – can receive many Bids.  
+- **Bid** – generates one or more Transactions. 
+- **Bid_history** – can tracks all bids over time, linked to both User and Auction.
 
-![Entity Relationship Diagram](Diagrams/ER%20Diagram.png)  
+![Entity Relationship Diagram](Diagrams/ERdiagram placing bid.drawio.png)  
 
 ---
 
