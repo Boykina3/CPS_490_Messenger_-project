@@ -3,6 +3,8 @@
 **Anthony Boykin** 
 
 **Nathan Hetman**
+
+**Brock Hensley**
  
 
 ---
@@ -69,9 +71,8 @@ The system will operate as a web-based auction platform and interface with a bac
 - Display real-time countdown timers and bid updates
 
 ### User Characteristics  
-- **Users**: Primary actors who can create accounts, list items, browse auctions, and place bids.  
-- **Administrators**: Manage user accounts, oversee auctions, and ensure system integrity.
-- **System**: Automatically manages auction timing, bid validation, and real-time updates.
+- **Users**: Primary actors who can create accounts, list items, browse auctions, and place bids.   
+- **System**: Automatically manages auction timing, bid validation, and real-time updates. Manage user accounts, oversee auctions, and ensure system integrity.
 
 ### Constraints  
 - Web-based with mobile compatibility
