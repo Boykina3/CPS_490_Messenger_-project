@@ -112,7 +112,7 @@ User interact with multiple processes through associative entities such as:
 - **Bid** – generates one or more Transactions. 
 - **Bid_history** – can tracks all bids over time, linked to both User and Auction.
 
-![ERdiagramplacingbid](Diagrams/ERdiagram placing bid.drawio.png)  
+![Entity-Relationship Diagram](Diagrams/ERdiagramplacingbid.drawio.png)  
 
 ---
 
