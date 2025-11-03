@@ -26,3 +26,15 @@ export const getUserInfo = async (id) => {
     })
      return await res.json()
   }
+export const updateUser = async (id, { username, password, token }) => {
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}user/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ username, password }),
+  })
+  if (!res.ok) throw new Error('Failed to update account')
+  return res.json()
+}

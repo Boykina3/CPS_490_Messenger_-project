@@ -10,6 +10,7 @@ export function Header() {
     return (
       <div>
         Logged in as <User id={sub}/>
+        <Link to="/update-account"> Update Account </Link> |
         <br />
         <button onClick={() => setToken(null)}>Logout</button>
       </div>

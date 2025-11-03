@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Signup } from './pages/Signup.jsx'
 import { AuthContextProvider } from './context/AuthContext.jsx'
 import { Login } from './pages/Login.jsx'
+import { UpdateAccount } from './pages/UpdateAccount.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,9 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  { path: '/update-account', 
+    element: <UpdateAccount />, 
   },
 ])
 
