@@ -1,63 +1,74 @@
-import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
-import { login } from '../api/user.js'
-import { useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext.jsx'
+import {useState, useEffect} from 'react'
+import {useMutation} from '@tanstack/react-query'
+import {useNavigate, Link} from 'react-router-dom'
+import {login} from '../api/user'
+import {useAuth} from '../context/AuthContext'
 
 export function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
-  const [, setToken] = useAuth()
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const navigate = useNavigate()
+    const [token, setToken] = useAuth()
 
-  const loginMutation = useMutation({
-    mutationFn: () => login({ username, password }),
-    onSuccess: (data) => {
-      setToken(data.token)
-      navigate('/') 
-    },
-    onError: () => alert('Failed to login!')
-  })
+    // If already logged in, redirect to home
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+        }
+    }, [token, navigate])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    loginMutation.mutate()
-  }
+    const loginMutation = useMutation({
+        mutationFn: () => login({username, password}),
+        onSuccess: (data) => {
+            setToken(data.token)
+            navigate('/')
+        },
+        onError: () => alert('failed to login!')
+    })
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <Link to="/">Back to main page</Link>
-      <hr />
-      <br />
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        loginMutation.mutate()
+    }
 
-      <div>
-        <label htmlFor="create-username">Username:</label>
-        <input
-          type="text"
-          name="create-username"
-          id="create-username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
+    return (
+        <div className="login-container">
+            <form onSubmit={handleSubmit} className="login-form">
+                <h1>Sign in to your account</h1>
+                
+                <div className="signup-prompt">
+                    <span>New here? </span>
+                    <Link to='/signup'>Create account</Link>
+                </div>
 
-      <div>
-        <label htmlFor="create-password">Password:</label>
-        <input
-          type="password"
-          name="create-password"
-          id="create-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
+                <div className="form-group">
+                    <input
+                        type='text'
+                        id='username'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Username"
+                    />
+                </div>
 
-      <br />
-      <input
-        type="submit"
-        value={loginMutation.isPending ? 'Logging in...' : 'Log in'}
-        disabled={!username || !password || loginMutation.isPending}
-      />
-    </form>
-  )
+                <div className="form-group">
+                    <input
+                        type='password'
+                        id='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                    />
+                </div>
+
+                <button 
+                    type='submit'
+                    className="continue-btn"
+                    disabled={!username || !password || loginMutation.isPending}
+                >
+                    {loginMutation.isPending ? 'Signing in...' : 'Continue'}
+                </button>
+            </form>
+        </div>
+    )
 }
