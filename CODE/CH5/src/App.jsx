@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import { Signup } from './pages/Signup.jsx'
 import { AuthContextProvider, useAuth } from './context/AuthContext.jsx'
 import { Login } from './pages/Login.jsx'
+import { UpdateAccount } from './pages/UpdateAccount.jsx'
 
-// Protected route component
 function ProtectedRoute({ children }) {
   const [token] = useAuth()
   
@@ -32,6 +32,9 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+    { path: '/update-account', 
+    element: <UpdateAccount />, 
   },
 ])
 

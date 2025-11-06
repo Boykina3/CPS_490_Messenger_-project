@@ -1,30 +1,46 @@
-import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
-import { updateUser } from '../api/user.js'
-import { useAuth } from '../context/AuthContext.jsx'
-import { jwtDecode } from 'jwt-decode'
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { updateUser } from "../api/user.js";
+import { useAuth } from "../context/AuthContext.jsx";
+import { jwtDecode } from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
 
 export function UpdateAccount() {
-  const [token] = useAuth()
-  const navigate = useNavigate()
-  const { sub: userId } = jwtDecode(token)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [token] = useAuth();
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (token && typeof token === "string" && token.trim() !== "") {
+      try {
+        const decoded = jwtDecode(token);
+        setUserId(decoded.sub);
+      } catch (err) {
+        console.error("Invalid token format:", err);
+        navigate("/login");
+      }
+    } else {
+      navigate("/login"); 
+    }
+  }, [token, navigate]);
 
   const mutation = useMutation({
     mutationFn: () => updateUser(userId, { username, password, token }),
     onSuccess: () => {
-      alert('Account updated successfully!')
-      navigate('/')
+      alert("Account updated successfully!");
+      navigate("/");
     },
-    onError: () => alert('Failed to update account'),
-  })
+    onError: () => alert("Failed to update account"),
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    mutation.mutate()
-  }
+    e.preventDefault();
+    mutation.mutate();
+  };
+
+  if (!userId) return <p>Loading account info...</p>;
 
   return (
     <div style={{ padding: 16 }}>
@@ -52,9 +68,10 @@ export function UpdateAccount() {
         </div>
         <br />
         <button type="submit" disabled={mutation.isPending}>
-          {mutation.isPending ? 'Updating...' : 'Update Account'}
+          {mutation.isPending ? "Updating..." : "Update Account"}
         </button>
       </form>
     </div>
-  )
+  );
 }
+
