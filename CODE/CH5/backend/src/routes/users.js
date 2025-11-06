@@ -31,7 +31,6 @@ export function userRoutes(app) {
   })
   app.put('/api/v1/user/:id', requireAuth, async (req, res) => {
     try {
-      // Ensure that the logged-in user matches the target user ID
       if (req.auth.sub !== req.params.id) {
         return res.status(403).json({ error: 'Unauthorized to update this account.' })
       }

@@ -34,3 +34,21 @@ export async function getUserInfoById(userId) {
     return {username: userId}
   }
 }
+export async function updateUser(userId, { username, password }) {
+  const updateData = {}
+  if (username) updateData.username = username
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10)
+    updateData.password = hashedPassword
+  }
+
+  const user = await User.findByIdAndUpdate(
+    userId,
+    { $set: updateData },
+    { new: true, runValidators: true }
+  )
+
+  if (!user) throw new Error('User not found')
+  return { username: user.username, id: user._id }
+}
+
