@@ -11,9 +11,9 @@
 ## Table of Contents
 - [Introduction](#Introduction)
 
-- [Sprint0](#Sprint0)
+- [Sprint0](#Sprint-0)
 
-- [Sprint1](#Sprint1)
+- [Sprint1](#Sprint-1)
 
 ## Introduction
 
@@ -63,7 +63,7 @@ This document provides:
 
 ---
 
-## Sprint 0
+## Sprint-0
 
 ### Product Perspective  
 The system will operate as a web-based auction platform and interface with a backend database to store user accounts, auction items, bids, and bid histories. It will provide real-time updates for auctions and bids, ensuring all users see the latest bid information.
@@ -134,7 +134,7 @@ Detailed use case scenarios for each actor and process can be found in the [Use 
 
 ---
 
-## Sprint 1 
+## Sprint-1 
 
 ###  User Guide
 
