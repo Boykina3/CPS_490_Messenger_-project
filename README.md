@@ -128,3 +128,81 @@ Detailed use case scenarios for each actor and process can be found in the [Use 
 
 ---
 
+### User Guide 
+1) Create an account
+   Click on create account.
+   Enter your personalized username and password.
+   Click sign up.
+   This then takes you back to log in page.
+2) Log in 
+   Enter your username and password you made.
+   Click on login.
+   Login is confirmed, if you're brought onto the posts page.
+3) Visit post page 
+   User needs to successfully login and they will able to see posts.
+4) Log out
+   When in the posts page click log out.
+5) Update your account
+   User needs to be logged in.
+   Then click on update account.
+   Change username,password or both.
+   Click update account to confirm.
+
+### User Interface
+
+### Program Flow
+1) Create an account/Password stored securely -
+  Frontend:
+    User enters their personalized username and password in the signup page
+    this request from the signup page uses the signup function in api/user.js 
+    This then sends a POST /api/v1/user/signup requesting  {username, password} which sends to the backend
+  Backend:
+    Then routes/users.js is the receives the signup request
+    This then calls creatUser function in services/users.js 
+    Within createUser function the password that is created is hashed by adding bcrypt in it being(bcrypt.hash(password,10))
+    The new user has their account infor recorded being the username + hashed password which is stored in MongoDB using the     User model.
+2) User login -
+  Frontend:
+    User enters their login info in the login page 
+    This calls the login function from api/user.js which uses POST /api/v1/user/login requesting {username,password}
+    If Login is successful backend then returns a JWT that is stored in AuthContext letting the app know that user is now       logged in
+  Backend:
+    This goes to routes/users.js receives the login request and calls for loginUser function in services/users.js
+    Then loginUser function finds the user in MongoDB this then uses bcypt.compare to verify the password
+    If the users login credentials are valid then it generates a JWT token which is then returned to the frontend
+3) Logout
+   Frontend: 
+    When user logs out this removes the JWT from AuthContext being setToken(null)
+    Once this token is removed the users login is not authenticated anymore.
+  Backend:
+    No actions happen in the backend
+4) Accessing a Restricted Page
+  Frontend:
+    When user login is accepted the frontend sends a stored token being Authorization: Bearer <token> through updateUser        function in api/user.js
+  Backend:
+    This then goes to routes/users.js which is secured by requireAuth from middleware/jwt.js 
+    With requireAuth function its placed to verify that the JWT token is used to be the servers key
+    If token is valid the backend knows what users is making these requests
+5) Unauthorized users not being able to access the restricted page
+  Frontend:
+    If user cant login no token is stored
+  Backend:
+    This then goes to requireAuth function which will return a 401 being that no token was sent.
+6) Logged in user updating their account info
+  Frontend:
+    When clicking on the update account button the user is sent to the page
+    This user thats logged in sends their new login credentials through and then its sent to updateUser function within         api/user.js
+    The request haves the JWT which lets the server know what user is making the request
+    The user may update their username, password or both
+  Backend:
+    This then goes to the routes/user.js but is protected with requireAuth function
+    Since its protected we have to check if the JWT is valid and the user ID within this token matches the ID in the URL
+    If user is updating the password then it reshases the password with bcrypt before it saves it
+    Then the MongoDB stores the updated information.
+
+
+
+
+
+
+
