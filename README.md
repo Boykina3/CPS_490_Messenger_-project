@@ -228,6 +228,16 @@ If the logged-in user’s ID matches the URL ID, the password (if changed) is re
 
 ---
 
+## User Interface Design
+
+---
+Our main goal for our UI design is to make it familar to other apps that you use when you sign in and make it simple.
+
+---
+### Why/How
+Why we did it this way is that we dont want to overwelhm the user when they're on our site. With having too much things to see and click on it can make it less easy for what their main reason was to do on our site.
+How we did this was taking a lot of inspiration from the ebays login ui and just added all the account features within the top of the site.
+
 
 
 
