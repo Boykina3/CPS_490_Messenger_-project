@@ -238,6 +238,7 @@ Why we did it this way is that we dont want to overwelhm the user when they're o
 
 How we did this was taking a lot of inspiration from the ebays login ui and just added all the account features within the top of the site.
 
+---
 
 
 
