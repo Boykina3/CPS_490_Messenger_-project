@@ -235,6 +235,7 @@ Our main goal for our UI design is to make it familar to other apps that you use
 
 ## Why/How
 Why we did it this way is that we dont want to overwelhm the user when they're on our site. With having too much things to see and click on it can make it less easy for what their main reason was to do on our site.
+
 How we did this was taking a lot of inspiration from the ebays login ui and just added all the account features within the top of the site.
 
 
