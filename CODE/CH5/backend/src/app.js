@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import {postsRoutes} from './routes/posts.js'
 import {userRoutes} from './routes/users.js'
+import { auctionRoutes } from './routes/auctions.js'
 
 const app = express()
 app.use(bodyParser.json())
@@ -26,3 +27,4 @@ app.get('/', (req, res) => {
 })
 
 export {app}
+auctionRoutes(app)

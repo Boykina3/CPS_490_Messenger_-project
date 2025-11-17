@@ -5,6 +5,8 @@ import { Signup } from './pages/Signup.jsx'
 import { AuthContextProvider, useAuth } from './context/AuthContext.jsx'
 import { Login } from './pages/Login.jsx'
 import { UpdateAccount } from './pages/UpdateAccount.jsx'
+import { CreateAuction } from './pages/CreateAuction.jsx'
+
 
 function ProtectedRoute({ children }) {
   const [token] = useAuth()
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
     { path: '/update-account', 
     element: <UpdateAccount />, 
   },
+  {
+  path: '/create-auction',
+  element: <CreateAuction />
+},
 ])
 
 const queryClient = new QueryClient()

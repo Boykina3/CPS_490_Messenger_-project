@@ -10,7 +10,6 @@ export function Login() {
     const navigate = useNavigate()
     const [token, setToken] = useAuth()
 
-    // If already logged in, redirect to home
     useEffect(() => {
         if (token) {
             navigate('/')

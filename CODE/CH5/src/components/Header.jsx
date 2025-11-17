@@ -12,6 +12,10 @@ export function Header() {
       <div>
         Hi! <INput:date></INput:date> <User id={sub}/>
         <br />
+         <button 
+          onClick={() => navigate('/create-auction')}
+          style={{ marginRight: 8 }}
+        >Createauction</button>
         <button onClick={() => navigate('/update-account')} style={{  marginRight: 8 }}>Update Account</button>
         <button onClick={() => setToken(null)}>Logout</button>
       </div>
