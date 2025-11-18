@@ -24,7 +24,7 @@ export function CreateAuction() {
 
     if (res.ok) {
       alert('Auction created!')
-      navigate('/')
+      navigate('/')  
     } else {
       alert('Error creating auction')
     }
