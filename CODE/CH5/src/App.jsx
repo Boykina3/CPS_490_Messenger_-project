@@ -6,6 +6,7 @@ import { AuthContextProvider, useAuth } from './context/AuthContext.jsx'
 import { Login } from './pages/Login.jsx'
 import { UpdateAccount } from './pages/UpdateAccount.jsx'
 import { CreateAuction } from './pages/CreateAuction.jsx'
+import { AuctionDetail } from './pages/AuctionDetail'
 
 
 function ProtectedRoute({ children }) {
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
   {
   path: '/create-auction',
   element: <CreateAuction />
-},
+  },
+  {
+  path: '/auctions/:id',
+  element: <AuctionDetail />
+  }
 ])
 
 const queryClient = new QueryClient()

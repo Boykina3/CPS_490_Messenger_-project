@@ -9,6 +9,16 @@ const auctionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+   startingBid: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+   currentBid: {
+    type: Number,
+    required: true,
+    default: 0
+   },
   endTime: {
     type: Date,
     required: true,
@@ -17,6 +27,16 @@ const auctionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
+  },
+  status: {
+    type: String,
+    enum: ['active', 'ended'],
+    default: 'active'
+  },
+  winner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null
   }
 }, { timestamps: true })
 

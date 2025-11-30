@@ -72,10 +72,10 @@ app.get('/auth/logout', (req, res) => {
 
 postsRoutes(app)
 userRoutes(app)
+auctionRoutes(app)
 
 app.get('/', (req, res) => {
     res.send('Hello from Express!')
 })
 
 export {app}
-auctionRoutes(app)
