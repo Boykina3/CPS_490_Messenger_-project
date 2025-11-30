@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { signup } from '../api/user.js'
 import {useNavigate, Link} from 'react-router-dom'
+import '../css/login.css';
 
 
 export function Signup() {
@@ -20,39 +21,59 @@ export function Signup() {
     signupMutation.mutate()
   }
 
-  return (
-    <form onSubmit={handleSubmit}>
-        <Link to='/' >Back to main page</Link>
-        <hr />
-        <br />
-      <div>
-        <label htmlFor="create-username">Username:</label>
-        <input
-          type="text"
-          name="create-username"
-          id="create-username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
+  const handleGoogleLogin = () => {
+        window.location.href = 'http://localhost:3001/auth/google'
+    }
 
-      <div>
-        <label htmlFor="create-password">Password:</label>
-        <input
-          type="password"
-          name="create-password"
-          id="create-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
+   return (
+    <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1>Create an account</h1>
+        <div className="signup-prompt">
+          <span>Already have an account? </span>
+          <Link to="/login">Sign in</Link>
+        </div>
 
-      <br />
-      <input
-        type="submit"
-        value={signupMutation.isPending ? 'Signing up...' : 'Sign up'}
-        disabled={!username || !password || signupMutation.isPending}
-      />
-    </form>
+        <div className="form-group">
+          <input
+            type="text"
+            id="create-username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+          />
+        </div>
+
+        <div className="form-group">
+          <input
+            type="password"
+            id="create-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="continue-btn"
+          disabled={!username || !password || signupMutation.isPending}
+        >
+          {signupMutation.isPending ? 'Signing up...' : 'Sign Up'}
+        </button>
+
+        <button 
+                    type="button"
+                    onClick={handleGoogleLogin}
+                    className="google-btn"
+                >
+                    <img
+                        src="https://developers.google.com/identity/images/g-logo.png"
+                        alt="Google logo"
+                    />
+                    Create account with Google
+                </button>
+      </form>
+    </div>
   )
 }

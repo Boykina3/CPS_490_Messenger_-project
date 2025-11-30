@@ -10,12 +10,12 @@ export function Header() {
     const {sub} = jwtDecode(token) 
     return (
       <div>
-        Hi! <INput:date></INput:date> <User id={sub}/>
+        Hi! <User id={sub}/>
         <br />
          <button 
           onClick={() => navigate('/create-auction')}
           style={{ marginRight: 8 }}
-        >Createauction</button>
+        >Create Auction</button>
         <button onClick={() => navigate('/update-account')} style={{  marginRight: 8 }}>Update Account</button>
         <button onClick={() => setToken(null)}>Logout</button>
       </div>

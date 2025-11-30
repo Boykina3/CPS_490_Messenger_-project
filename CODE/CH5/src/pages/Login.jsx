@@ -3,6 +3,7 @@ import {useMutation} from '@tanstack/react-query'
 import {useNavigate, Link} from 'react-router-dom'
 import {login} from '../api/user'
 import {useAuth} from '../context/AuthContext'
+import '../css/login.css';
 
 export function Login() {
     const [username, setUsername] = useState('')
@@ -28,6 +29,10 @@ export function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         loginMutation.mutate()
+    }
+
+    const handleGoogleLogin = () => {
+        window.location.href = 'http://localhost:3001/auth/google'
     }
 
     return (
@@ -66,6 +71,19 @@ export function Login() {
                     disabled={!username || !password || loginMutation.isPending}
                 >
                     {loginMutation.isPending ? 'Signing in...' : 'Continue'}
+                </button>
+
+                
+                <button 
+                    type="button"
+                    onClick={handleGoogleLogin}
+                    className="google-btn"
+                >
+                    <img
+                        src="https://developers.google.com/identity/images/g-logo.png"
+                        alt="Google logo"
+                    />
+                    Sign in with Google
                 </button>
             </form>
         </div>
