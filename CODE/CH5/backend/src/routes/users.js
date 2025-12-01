@@ -30,6 +30,38 @@ export function userRoutes(app) {
       })
     }
   })
+
+    // ADD TOKENS ROUTE - Add this here
+  app.post('/api/v1/user/:id/tokens', requireAuth, async (req, res) => {
+    try {
+      if (req.auth.sub !== req.params.id) {
+        return res.status(403).json({ error: 'Unauthorized' })
+      }
+
+      const { amount } = req.body
+      
+      if (!amount || amount <= 0) {
+        return res.status(400).json({ error: 'Invalid amount' })
+      }
+
+      const user = await User.findById(req.params.id)
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' })
+      }
+
+      user.tokens += amount
+      await user.save()
+
+      return res.status(200).json({ 
+        message: 'Tokens added successfully',
+        tokens: user.tokens 
+      })
+    } catch (err) {
+      console.error('Error adding tokens:', err)
+      return res.status(500).json({ error: 'Failed to add tokens' })
+    }
+  })
+  
   app.put('/api/v1/user/:id', requireAuth, async (req, res) => {
     try {
       if (req.auth.sub !== req.params.id) {
@@ -75,3 +107,4 @@ export function userRoutes(app) {
     }
   })
 }
+
