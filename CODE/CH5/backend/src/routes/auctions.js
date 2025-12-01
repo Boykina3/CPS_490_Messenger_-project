@@ -37,6 +37,27 @@ app.get('/api/v1/auctions/:id', async (req, res) => {
     }
   })
 
+  app.delete('/api/v1/auctions/:id', requireAuth, async (req, res) => {
+  try {
+    const auction = await Auction.findById(req.params.id)
+    
+    if (!auction) {
+      return res.status(404).json({ error: 'Auction not found' })
+    }
+    
+    // Check if user is the author 
+    if (auction.author.toString() !== req.auth.sub) {
+      return res.status(403).json({ error: 'Not authorized to delete this auction' })
+    }
+    
+    await Auction.findByIdAndDelete(req.params.id)
+    res.status(200).json({ message: 'Auction deleted successfully' })
+  } catch (err) {
+    console.error('Error deleting auction:', err)
+    res.status(500).json({ error: 'Failed to delete auction' })
+  }
+})
+
 app.post('/api/v1/auctions/:id/bid', requireAuth, async (req, res) => {
     try {
       const result = await placeBid(req.params.id, req.auth.sub, req.body.amount)

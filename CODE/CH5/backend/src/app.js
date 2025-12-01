@@ -5,6 +5,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import passport from 'passport'
+import jwt from 'jsonwebtoken'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import {postsRoutes} from './routes/posts.js'
 import {userRoutes} from './routes/users.js'
@@ -40,6 +41,14 @@ passport.use(
   )
 )
 
+passport.serializeUser((user, done) => {
+  done(null, user)
+})
+
+passport.deserializeUser((user, done) => {
+  done(null, user)
+})
+
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:5173')
@@ -58,10 +67,27 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 
 app.get(
   '/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: 'http://localhost:5173/dashboard', // redirect to your frontend dashboard
-    failureRedirect: 'http://localhost:5173/login',
-  })
+  passport.authenticate('google', { failureRedirect: 'http://localhost:5173/login' }),
+  async (req, res) => {
+    console.log('Google profile:', req.user)
+    console.log('Emails:', req.user.emails)
+    
+    const { User } = await import('./db/models/user.js')
+    let user = await User.findOne({ username: req.user.emails[0].value })
+    
+    if (!user) {
+      user = new User({
+        username: req.user.emails[0].value,
+        password: 'google-oauth-user', 
+        tokens: 100
+      })
+      await user.save()
+    }
+    
+    const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET || 'your-secret-key')
+    console.log('Generated token:', token)
+    res.redirect(`http://localhost:5173/?token=${token}`)
+  }
 )
 
 app.get('/auth/logout', (req, res) => {

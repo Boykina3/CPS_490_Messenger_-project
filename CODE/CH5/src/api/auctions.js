@@ -43,3 +43,14 @@ export async function getBidHistory(auctionId) {
   if (!res.ok) throw new Error("Failed to fetch bid history")
   return await res.json()
 }
+
+export async function deleteAuction(token, auctionId) {
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}auctions/${auctionId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  if (!res.ok) throw new Error("Failed to delete auction")
+  return await res.json()
+}
