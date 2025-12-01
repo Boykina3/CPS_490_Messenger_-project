@@ -254,11 +254,11 @@ https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7c
 ###  User Guide
 
 #### Create an Auction 
-1.User logs into thier account.
-2.Click Create Auction button.
-3.User Enters their title for the auction, enters their description for the item, enters their starting bid price, and enters their end date and time for the auction.
-4.Click Create Auction for it to publish.
-5.The user will then be sent back to the active auction list.
+  1.User logs into thier account.
+  2.Click Create Auction button.
+  3.User Enters their title for the auction, enters their description for the item, enters their starting bid price, and enters their end date and time for the auction.
+  4.Click Create Auction for it to publish.
+  5.The user will then be sent back to the active auction list.
 
 #### View Active Auctions 
 1. User logs into thier account.
@@ -273,12 +273,12 @@ https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7c
 When user clicks on the Auction box they then should see the image, title, description of the item, how many tokens the highest bid is and which user who did the bidding was, and a realtime countdown of when the auction ends with it stating that its live. When a bid is made there is a Bid History that is created with stating the name of the user, the time they made their bid, and how much tokens was used for the bid. At the very bottom it will state how much bids have been made and the starting price of the bid.
 
 #### Place a bid with Tokens
-1.User logs into thier account.
-2.User enters into the auction they want to bid on.
-3.Enter the amount of tokens they want to use to bid.
-4. User clicks place bid.
-5. If the auction is active, the bid number is higher than the current bid, and user has enough tokens then the bid will be accepted.
-6.This then will add the username, the time the user has bid, and how much tokens was used it.
+  1.User logs into thier account.
+  2.User enters into the auction they want to bid on.
+  3.Enter the amount of tokens they want to use to bid.
+  4. User clicks place bid.
+  5. If the auction is active, the bid number is higher than the current bid, and user has enough tokens then the bid will be accepted.
+  6.This then will add the username, the time the user has bid, and how much tokens was used it.
 
 
 
