@@ -83,7 +83,6 @@ export function Login() {
                     {loginMutation.isPending ? 'Signing in...' : 'Continue'}
                 </button>
 
-                
                 {/* need to fix this in future, currently does not work 
                 <button 
                     type="button"
