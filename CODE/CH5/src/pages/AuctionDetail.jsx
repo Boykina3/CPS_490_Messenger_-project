@@ -104,7 +104,7 @@ export function AuctionDetail() {
   }
 
   // Check if current user is the auction creator
-  const isCreator = payload && auction && payload.id === auction.creator?._id
+    const isCreator = payload && auction && payload.id === auction.author?._id
 
   if (!auction) return (
     <div className="auction-loading">

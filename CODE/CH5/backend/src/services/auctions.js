@@ -27,6 +27,23 @@ export async function placeBid(auctionId, userId, amount) {
   if (auction.status === 'ended') throw new Error('Auction has ended')
   if (new Date() > auction.endTime) throw new Error('Auction time expired')
   if (amount <= auction.currentBid) throw new Error('Bid must be higher than current bid')
+
+  const previousBid = await Bid.findOne({ auction: auctionId })
+    .sort({ createdAt: -1 })
+    .limit(1)
+
+  if (previousBid && previousBid.user.toString() !== userId) {
+    const previousBidder = await User.findById(previousBid.user)
+    if (previousBidder) {
+      previousBidder.tokens += previousBid.amount
+      await previousBidder.save()
+    }
+  }
+
+  if (previousBid && previousBid.user.toString() === userId) {
+    user.tokens += previousBid.amount
+  }
+
   if (user.tokens < amount) throw new Error('Insufficient tokens')
 
   user.tokens -= amount

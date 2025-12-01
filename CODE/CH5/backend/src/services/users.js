@@ -29,7 +29,7 @@ export async function getUserInfoById(userId) {
   try{
     const user = await User.findById(userId)
     if (!user) return { username: userId }
-    return { username: user.username }
+    return { username: user.username, tokens: user.tokens }
   } catch (err) {
     return {username: userId}
   }
@@ -51,4 +51,15 @@ export async function updateUser(userId, { username, password }) {
   if (!user) throw new Error('User not found')
   return { username: user.username, id: user._id }
 }
-
+export async function addTokens(token, userId, amount) {
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}user/${userId}/tokens`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ amount })
+  })
+  if (!res.ok) throw new Error('Failed to add tokens')
+  return await res.json()
+}
