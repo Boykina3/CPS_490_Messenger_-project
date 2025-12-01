@@ -283,9 +283,9 @@ When user clicks on the Auction box they then should see the image, title, descr
   
   3.Enter the amount of tokens they want to use to bid.
   
-  4. User clicks place bid.
+  4.User clicks place bid.
   
-  5. If the auction is active, the bid number is higher than the current bid, and user has enough tokens then the bid will be accepted.
+  5.If the auction is active, the bid number is higher than the current bid, and user has enough tokens then the bid will be accepted.
      
   6.This then will add the username, the time the user has bid, and how much tokens was used it.
 
