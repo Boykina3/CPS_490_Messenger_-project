@@ -1,0 +1,137 @@
+/* Container */
+.auctions-list-page {
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.auctions-page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.auctions-page-header h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.auctions-subtitle {
+  color: #666;
+}
+
+/* States */
+.auctions-loading-state,
+.auctions-error-state,
+.auctions-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.auctions-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e3f2fd;
+  border-top-color: #4c7dd9;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Grid */
+.auctions-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.auctions-list-card-link {
+  text-decoration: none;
+}
+
+.auctions-list-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e9ecef;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.auctions-list-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(76, 125, 217, 0.15);
+}
+
+.auctions-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.auctions-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.auctions-status-badge {
+  padding: 4px 10px;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.auctions-card-description {
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+.auctions-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.auctions-stat-label {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.auctions-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4c7dd9;
+}
+
+.auctions-card-footer {
+  padding-top: 16px;
+  border-top: 1px solid #e9ecef;
+}
+
+.auctions-view-link {
+  color: #4c7dd9;
+  font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .auctions-list-grid {
+    grid-template-columns: 1fr;
+  }
+}
