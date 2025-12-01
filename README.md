@@ -250,6 +250,9 @@ How we did this was taking a lot of inspiration from the ebays login ui and just
 
 ###  User Guide
 
+#### Heroku Link
+https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7cc54
+
 #### Create an Auction with an Image
 1.User logs into thier account
 2.Click Create Auction button
