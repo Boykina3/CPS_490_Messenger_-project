@@ -31,7 +31,6 @@ export function userRoutes(app) {
     }
   })
 
-    // ADD TOKENS ROUTE - Add this here
   app.post('/api/v1/user/:id/tokens', requireAuth, async (req, res) => {
     try {
       if (req.auth.sub !== req.params.id) {
@@ -61,7 +60,7 @@ export function userRoutes(app) {
       return res.status(500).json({ error: 'Failed to add tokens' })
     }
   })
-  
+
   app.put('/api/v1/user/:id', requireAuth, async (req, res) => {
     try {
       if (req.auth.sub !== req.params.id) {
