@@ -254,6 +254,7 @@ How we did this was taking a lot of inspiration from the ebays login ui and just
 1.User logs into thier account
 2.Click Create Auction button
 3.User Enters their title for the auction, enters their description for the item, enters their starting bid price, and enters their end date and time for the auction
+
 4.Click Create Auction for it to publish
 5.The user will then be sent back to the active auction list
 
