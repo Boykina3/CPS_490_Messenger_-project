@@ -84,6 +84,7 @@ export function Login() {
                 </button>
 
                 
+                {/* need to fix this in future, currently does not work 
                 <button 
                     type="button"
                     onClick={handleGoogleLogin}
@@ -95,6 +96,7 @@ export function Login() {
                     />
                     Sign in with Google
                 </button>
+                */}
             </form>
         </div>
     )
