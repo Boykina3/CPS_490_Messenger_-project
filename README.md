@@ -274,7 +274,7 @@ https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7c
 3. This then will display the auction detail page.
 
 #### Whats On the Auction Detail Page
-When user clicks on the Auction box they then should see the image, title, description of the item, how many tokens the highest bid is and which user who did the bidding was, and a realtime countdown of when the auction ends with it stating that its live. When a bid is made there is a Bid History that is created with stating the name of the user, the time they made their bid, and how much tokens was used for the bid. At the very bottom it will state how much bids have been made and the starting price of the bid.
+When user clicks on the Auction box they then should see the title, description of the item, how many tokens the highest bid is and which user who did the bidding was, and a realtime countdown of when the auction ends with it stating that its live. When a bid is made there is a Bid History that is created with stating the name of the user, the time they made their bid, and how much tokens was used for the bid. At the very bottom it will state how much bids have been made and the starting price of the bid.
 
 #### Place a bid with Tokens
   1.User logs into thier account.
@@ -288,6 +288,26 @@ When user clicks on the Auction box they then should see the image, title, descr
   5.If the auction is active, the bid number is higher than the current bid, and user has enough tokens then the bid will be accepted.
      
   6.This then will add the username, the time the user has bid, and how much tokens was used it.
+
+---
+
+## Program Flow
+
+### 1 Create an Auction Post
+
+### 2 View Auction List
+
+### 3 View Auction Details
+
+### 4 Place Bids
+
+### 5 Delete Auction
+
+### 6 Delete Account
+
+### 7 Bid History
+
+### 8 Adding tokens
 
 
 
