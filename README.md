@@ -248,17 +248,20 @@ How we did this was taking a lot of inspiration from the ebays login ui and just
 
 ## Sprint-2
 
-###  User Guide
-
 #### Heroku Link
 https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7cc54
 
-#### Create an Auction with an Image
-1.User logs into thier account
-2.Click Create Auction button
-3.User Enters their title for the auction, enters their description for the item, enters their starting bid price, and enters their end date and time for the auction
+###  User Guide
 
+#### Create an Auction 
+1.User logs into thier account
+-
+2.Click Create Auction button
+-
+3.User Enters their title for the auction, enters their description for the item, enters their starting bid price, and enters their end date and time for the auction
+-
 4.Click Create Auction for it to publish
+-
 5.The user will then be sent back to the active auction list
 
 #### View Active Auctions 
@@ -275,10 +278,15 @@ When user clicks on the Auction box they then should see the image, title, descr
 
 #### Place a bid with Tokens
 1.User logs into thier account
+-
 2.User enters into the auction they want to bid on
+-
 3.Enter the amount of tokens they want to use to bid
+-
 4. User clicks place bid
+-
 5. If the auction is active, the bid number is higher than the current bid, and user has enough tokens then the bid will be accepted
+-
 6.This then will add the username, the time the user has bid, and how much tokens was used it
 
 
