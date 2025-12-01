@@ -1,28 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import { PostList } from '../components/PostList.jsx'
-import { CreatePost } from '../components/CreatePost.jsx'
-import { PostFilter } from '../components/PostFilter.jsx'
-import { PostSorting } from '../components/PostSorting.jsx'
-import { getPosts } from '../api/posts.js'
 import { fetchActiveAuctions } from '../api/auctions.js'
-import { useState } from 'react'
 import { Header } from '../components/Header.jsx'
 import { Link } from 'react-router-dom'
-import '../css/auctions.css'
-
+import '../css/auctions-list.css'
 
 export function Blog() {
-  const [author, setAuthor] = useState('')
-  const [sortBy, setSortBy] = useState('createdAt')
-  const [sortOrder, setSortOrder] = useState('descending')
-  
-  const postsQuery = useQuery({
-  queryKey: ['posts', { author, sortBy, sortOrder }],
-  queryFn: () => getPosts({ author, sortBy, sortOrder }),
-})
-
-  const posts = postsQuery.data ?? []
-
   const auctionsQuery = useQuery({
     queryKey: ['active-auctions'],
     queryFn: fetchActiveAuctions,
@@ -31,53 +13,88 @@ export function Blog() {
   
   const activeAuctions = auctionsQuery.data ?? []
 
+  // Calculate time remaining for each auction
+  const getTimeRemaining = (endTime) => {
+    const now = new Date()
+    const end = new Date(endTime)
+    const diff = end - now
+    
+    if (diff <= 0) return 'Ended'
+    
+    const days = Math.floor(diff / 86400000)
+    const hours = Math.floor((diff % 86400000) / 3600000)
+    const mins = Math.floor((diff % 3600000) / 60000)
+    
+    if (days > 0) return `${days}d ${hours}h`
+    if (hours > 0) return `${hours}h ${mins}m`
+    return `${mins}m`
+  }
+
   return (
-    <div style={{ padding: 8 }}>
+    <>
       <Header />
-      <br />
-      <br />
-      <br />
-      
-      <h2>Active Auctions</h2>
-      {auctionsQuery.isLoading && <p>Loading auctions...</p>}
-      {auctionsQuery.error && <p>Error loading auctions.</p>}
-      {activeAuctions.length === 0 && <p>No active auctions found.</p>}
+      <div className="auctions-list-page">
+        <div className="auctions-list-container">
+          <div className="auctions-page-header">
+            <h1>Live Auctions</h1>
+            <p className="auctions-subtitle">Bid on exclusive items and collectibles</p>
+          </div>
 
-      <div className="auction-grid">
-  {activeAuctions.map(a => (
-    <Link to={`/auctions/${a._id}`} key={a._id} style={{ textDecoration: 'none' }}>
-      <article className="auction-card">
-        <h3>{a.title}</h3>
-        <p>{a.description}</p>
-        <div className="auction-info">
-          <strong>Current Bid:</strong> {a.currentBid} tokens<br />
-          <strong>Ends:</strong> {new Date(a.endTime).toLocaleString()}
+          {auctionsQuery.isLoading && (
+            <div className="auctions-loading-state">
+              <div className="auctions-spinner"></div>
+              <p>Loading auctions...</p>
+            </div>
+          )}
+
+          {auctionsQuery.error && (
+            <div className="auctions-error-state">
+              <p>❌ Error loading auctions. Please try again.</p>
+            </div>
+          )}
+
+          {!auctionsQuery.isLoading && activeAuctions.length === 0 && (
+            <div className="auctions-empty-state">
+              <p>📭 No active auctions at the moment</p>
+              <p className="auctions-empty-subtitle">Check back soon for new listings!</p>
+            </div>
+          )}
+
+          <div className="auctions-list-grid">
+            {activeAuctions.map(auction => (
+              <Link 
+                to={`/auctions/${auction._id}`} 
+                key={auction._id} 
+                className="auctions-list-card-link"
+              >
+                <article className="auctions-list-card">
+                  <div className="auctions-card-header">
+                    <h3 className="auctions-card-title">{auction.title}</h3>
+                    <span className="auctions-status-badge">Live</span>
+                  </div>
+                  
+                  <p className="auctions-card-description">{auction.description}</p>
+                  
+                  <div className="auctions-card-stats">
+                    <div className="auctions-stat">
+                      <span className="auctions-stat-label">Current Bid</span>
+                      <span className="auctions-stat-value">{auction.currentBid} tokens</span>
+                    </div>
+                    <div className="auctions-stat">
+                      <span className="auctions-stat-label">Time Left</span>
+                      <span className="auctions-stat-value time">{getTimeRemaining(auction.endTime)}</span>
+                    </div>
+                  </div>
+
+                  <div className="auctions-card-footer">
+                    <span className="auctions-view-link">View Auction →</span>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
         </div>
-      </article>
-    </Link>
-  ))}
-</div>
-
-      <hr />
-      <CreatePost />
-      <br />
-      <hr />
-      Filter By:
-      <PostFilter
-        field='author'
-        value={author}
-        onChange={(value) => setAuthor(value)}
-      />
-      <br />
-      <PostSorting
-        fields={['createdAt', 'updatedAt']}
-        value={sortBy}
-        onChange={(value) => setSortBy(value)}
-        orderValue={sortOrder}
-        onOrderChange={(orderValue) => setSortOrder(orderValue)}
-      />
-      <hr />
-      <PostList posts={posts} />
-    </div>
+      </div>
+    </>
   )
 }

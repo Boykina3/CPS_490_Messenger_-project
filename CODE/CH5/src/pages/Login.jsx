@@ -12,10 +12,20 @@ export function Login() {
     const [token, setToken] = useAuth()
 
     useEffect(() => {
-        if (token) {
-            navigate('/')
-        }
-    }, [token, navigate])
+    // Check for token from Google OAuth in URL
+    const urlParams = new URLSearchParams(window.location.search)
+    const tokenParam = urlParams.get('token')
+    if (tokenParam) {
+        setToken(tokenParam)
+        navigate('/')
+        return
+    }
+    
+    // Regular token check
+    if (token) {
+        navigate('/')
+    }
+}, [token, setToken, navigate])
 
     const loginMutation = useMutation({
         mutationFn: () => login({username, password}),
