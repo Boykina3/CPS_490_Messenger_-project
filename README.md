@@ -1,3 +1,4 @@
+
 # UD Treasure Trove
   
 **Anthony Boykin** 
@@ -302,6 +303,9 @@ When user clicks on the Auction box they then should see the title, description 
 
 ### 2 View Auction List
 
+**Frontend:** The user is in the home page and the react component shows all the auctions from `AuctionList` loads all active auctions from the backend. The component calls `getAllAuctions()` in api/auctions.js, which sends GET /api/v1/auctions. api/auctions.js then gets the array of auctions and returns at the component that will go over the list and display all the auction details being the title, description, current bid, and the countdown timer. The user can now click onto the auction to see full auction details.
+
+**Backend:** routes/auctions.js defines GET /api/v1/auctions this route calls `getAllAuctions()` in services/auctions.js. `getAllAuctions()` queries the Auction that are submitted in MongoDB with Auction.find({status:"active" }) this will return the auctions that are all active with their statis === "active" and then gets sorted by creation time. Then this will be sent to the frontend by a list as a JSON when it arrives the frontend renders the list by its UI and will show all active auctions.
 ### 3 View Auction Details
 
 ### 4 Place Bids
