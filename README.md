@@ -295,6 +295,17 @@ When user clicks on the Auction box they then should see the title, description 
 
 ### 1 Create an Auction Post
 
+- **Frontend:** User sends their Create Auction form being CreateAuction.jsx senda a POST request with their title, description, startingBid, endTime and JWT.
+- **API Layer** `createAuction()` within api/auctions.js makes the backend request being `fetch(`${API_URL}auctions`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  },
+  body: JSON.stringify(auctionData)
+})`
+
+
 ### 2 View Auction List
 
 ### 3 View Auction Details
