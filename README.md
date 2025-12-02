@@ -255,6 +255,7 @@ https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7c
 ###  User Guide
 
 #### Create an Auction 
+
   1.User logs into thier account.
   
   2.Click Create Auction button.
@@ -266,18 +267,22 @@ https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7c
   5.The user will then be sent back to the active auction list.
 
 #### View Active Auctions 
+
 1. User logs into thier account.
 2. The active auctions will be shown when log in is valid.
 
 #### Open an Auction/View Auction Details
+
 1. User logs into thier account.
 2. When viewing active auctions user clicks on any auction card.
 3. This then will display the auction detail page.
 
 #### Whats On the Auction Detail Page
+
 When user clicks on the Auction box they then should see the title, description of the item, how many tokens the highest bid is and which user who did the bidding was, and a realtime countdown of when the auction ends with it stating that its live. When a bid is made there is a Bid History that is created with stating the name of the user, the time they made their bid, and how much tokens was used for the bid. At the very bottom it will state how much bids have been made and the starting price of the bid.
 
 #### Place a bid with Tokens
+
   1.User logs into thier account.
   
   2.User enters into the auction they want to bid on.
@@ -366,6 +371,7 @@ A user gets tokens when they sign up and when they click add tokens
 **Frontend:** The user clicks Add Tokens and then user enters how much tokens they want to add this then sends PUT /api/v1/user/:id/tokens including `"amount:=<number>` and authorizes that its the correct user giving the request.
 
 **Backend:** PUT /api/v1/user/:id/tokens is sent then `requireAuth` then checks if user is logged in and is adding to their account. If both are true then the backend loads the users id and updates their token about with `user.tokens += amount await user.save()` this then returns the correct value added to the frontend and will be displayed with the UI.
+
 ---
 
 ### User Interface Design
