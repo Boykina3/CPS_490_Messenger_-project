@@ -363,7 +363,8 @@ When user clicks on the Auction box they then should see the title, description 
 ### 8 Adding tokens/Updating tokens
 ---
 
-A user gets tokens when they sign up and when they click add tokens 
+A user gets tokens when they sign up and when they click add tokens.
+
 **Frontend:** User signs up then logs in the balance of 100 tokens is shown on their page.
 
 **Backend:** When user is confirmed signed up the backend creates User document adding `tokens:100` this will give to every new account that is signed up and will be sent to the frontend so the UI will show the user.
