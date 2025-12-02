@@ -295,15 +295,9 @@ When user clicks on the Auction box they then should see the title, description 
 
 ### 1 Create an Auction Post
 
-- **Frontend:** User sends their Create Auction form being CreateAuction.jsx senda a POST request with their title, description, startingBid, endTime and JWT.
-- **API Layer** `createAuction()` within api/auctions.js makes the backend request being `fetch(`${API_URL}auctions`, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`
-  },
-  body: JSON.stringify(auctionData)
-})`
+**Frontend:** User sends their Create Auction form being CreateAuction.jsx sends a POST /api/v1/auctions this request adds their title, description, startingBid, endTime. The user is allowed to post with the JWT token from AuthContext and calls `createAuction` in api/auctions.js. When the form is sent Authorization: Bearer <token> is included. If the request is a success then a message will pop up for the user and will send the user back to Active Auctions page seeing that their auction is listed.
+
+**Backend:** routes/auction.js defines the POST /api/v1/auctions endpoint and will keep it hidden with the `requireAuth`. Once the JWT is verified req.auth.sub is set to the users database ID. The route handler reads {title, description, startingBid,endTime} from req.body and will then call `createAuction` within services/auction.js. This then uses the Auction mode to create a new auction document adding the `title` and `decscription`, `startingBid` which would be set from the user if not set will start at 0, `currentBid` which is the same value as `startingBid`, `endTime` which is set from the user being date then time, `author` which is set to the users ID being req.auth.sub, and the `status` is set to "active". This then will be saved as a new auction within MongoDB and returns the saved auction object. The route will then send a response bacl to the user as a JSON stating the auction has been created. This will then make the frontend update the UI and show the new auction in the Active Auctions list.
 
 
 ### 2 View Auction List
