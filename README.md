@@ -320,14 +320,42 @@ When user clicks on the Auction box they then should see the title, description 
 
 ### 5 Delete Auction
 
-**Frontend:** The owner of the auction clicks Delete Auction button and user will confirm. The function `deleteAuction(token,auctionId) in api/auctions.js send DELETE /api/v1/auctions/:id with having it authorize the tokens in the users account so the amount doesnt change if a bid was made. If auction is deleted the user is brought back to the Active Auction list.
+**Frontend:** The owner of the auction clicks Delete Auction button and user will confirm. The function `deleteAuction(token,auctionId)` in api/auctions.js send DELETE /api/v1/auctions/:id with having it authorize the tokens in the users account so the amount doesnt change if a bid was made. If auction is deleted the user is brought back to the Active Auction list.
 
 **Backend:** DELETE /api/v1/auctions/:id loads the auction if this auction is not found it will throw an error 404 if it is. If the user isnt the authorized with being the author then it will throw a 403 error. If both of these errors dont occur then the auction is deleted.
+
 ### 6 Delete Account
+
+**Frontend:** When user is in Update Account page the user will then click Delete My Account button and confirms. This is when a request is sent being DELETE /api/v1/user/:id if successful the account will be deleted.
+
+**Backend:** DELETE /api/v1/user/:id is sent but needs to be checked that the account is authorized with req.auth.sub === req.params.id if this is not true it will throw a 403 error becuase theres no authorization. If theres no error thrown then the user has the function `User.findByIdAndDelete` which will delete the users auctions if they have any and will return a success message to the frontend notifying that it is deleted.
 
 ### 7 Bid History
 
-### 8 Adding tokens
+**Frontend:**  When the user is in Auction Detail page the function `getBidHistory(auctionID)` in api/auction.js gets called this then returns GET /api/v1/auctions/:id/bids. This will then bring a list to the user showing the username of the current bidder, the amount that this user has bid, and the time the bid was made. This will keep refetching itself so the history will stay up to date for each bid sent through.
+
+**Backend:** When GET /api/v1/auctions/:id/bids is sent here it will call the function `getBidHistory(auctionId)` in services/auction.js when this is complete the function `getBidHistory()` is used to find all bid documents for this current auction which will be sorted by newest is first by `createdAt` and uses the user field to include each username which was used when bid and returns the list to the frontend as a JSON
+
+### 8 Adding tokens/Updating tokens
+A user gets tokens when they sign up and when they click add tokens 
+**Frontend:** User signs up then logs in the balance of 100 tokens is shown on their page.
+
+**Backend:** When user is confirmed signed up the backend creates User document adding `tokens:100` this will give to every new account that is signed up and will be sent to the frontend so the UI will show the user.
+
+**Frontend:** The user clicks Add Tokens and then user enters how much tokens they want to add this then sends PUT /api/v1/user/:id/tokens including `"amount:=<number>` and authorizes that its the correct user giving the request.
+
+**Backend:** PUT /api/v1/user/:id/tokens is sent then `requireAuth` then checks if user is logged in and is adding to their account. If both are true then the backend loads the users id and updates their token about with `user.tokens += amount await user.save()` this then returns the correct value added to the frontend and will be displayed with the UI.
+
+### User Interface Design
+
+---
+Our main goal for our UI design is to make it familar to other apps that you use when you sign in and make it simple.
+
+## Why/How
+Why we did it this way is that we dont want to overwelhm the user when they're on our site. With having too much things to see and click on it can make it less easy for what their main reason was to do on our site.
+
+How we did this was taking a lot of inspiration from the ebays login ui and just added all the account features within the top of the site.
+
 
 
 
