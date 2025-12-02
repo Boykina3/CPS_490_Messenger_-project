@@ -64,7 +64,7 @@ This document provides:
 
 ---
 
-**CPS 490 - Phase 0 - System Overview & Use Cases**  
+**CPS 490 - Phas 0 - System Overview & Use Cases**  
 
 ---
 
@@ -256,7 +256,7 @@ https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7c
 
 #### Create an Auction 
 
-  1.User logs into thier account.
+  1.User logs into their account.
   
   2.Click Create Auction button.
   
@@ -268,12 +268,12 @@ https://hetmann1-test1-c87790f2c341.herokuapp.com/auctions/692d914e9b9039f3d7e7c
 
 #### View Active Auctions 
 
-1. User logs into thier account.
+1. User logs into their account.
 2. The active auctions will be shown when log in is valid.
 
 #### Open an Auction/View Auction Details
 
-1. User logs into thier account.
+1. User logs into their account.
 2. When viewing active auctions user clicks on any auction card.
 3. This then will display the auction detail page.
 
@@ -283,7 +283,7 @@ When user clicks on the Auction box they then should see the title, description 
 
 #### Place a bid with Tokens
 
-  1.User logs into thier account.
+  1.User logs into their account.
   
   2.User enters into the auction they want to bid on.
   
@@ -304,7 +304,7 @@ When user clicks on the Auction box they then should see the title, description 
 
 **Frontend:** User sends their Create Auction form being CreateAuction.jsx sends a POST /api/v1/auctions this request adds their title, description, startingBid, endTime. The user is allowed to post with the JWT token from AuthContext and calls `createAuction` in api/auctions.js. When the form is sent Authorization: Bearer <token> is included. If the request is a success then a message will pop up for the user and will send the user back to Active Auctions page seeing that their auction is listed.
 
-**Backend:** routes/auction.js defines the POST /api/v1/auctions endpoint and will keep it hidden with the `requireAuth`. Once the JWT is verified req.auth.sub is set to the users database ID. The route handler reads {title, description, startingBid,endTime} from req.body and will then call `createAuction` within services/auction.js. This then uses the Auction mode to create a new auction document adding the `title` and `decscription`, `startingBid` which would be set from the user if not set will start at 0, `currentBid` which is the same value as `startingBid`, `endTime` which is set from the user being date then time, `author` which is set to the users ID being req.auth.sub, and the `status` is set to "active". This then will be saved as a new auction within MongoDB and returns the saved auction object. The route will then send a response bacl to the user as a JSON stating the auction has been created. This will then make the frontend update the UI and show the new auction in the Active Auctions list.
+**Backend:** routes/auction.js defines the POST /api/v1/auctions endpoint and will keep it hidden with the `requireAuth`. Once the JWT is verified req.auth.sub is set to the users database ID. The route handler reads {title, description, startingBid,endTime} from req.body and will then call `createAuction` within services/auction.js. This then uses the Auction mode to create a new auction document adding the `title` and `decscription`, `startingBid` which would be set from the user if not set will start at 0, `currentBid` which is the same value as `startingBid`, `endTime` which is set from the user being date then time, `author` which is set to the users ID being req.auth.sub, and the `status` is set to "active". This then will be saved as a new auction within MongoDB and returns the saved auction object. The route will then send a response back to the user as a JSON stating the auction has been created. This will then make the frontend update the UI and show the new auction in the Active Auctions list.
 
 ---
 
@@ -320,16 +320,16 @@ When user clicks on the Auction box they then should see the title, description 
 ### 3 View Auction Details
 ---
 
-**Frontend:** On the Active Auctions each auction is viewed with /auctions/:id. When a user clicks and auction the react router will then navigate the user to the auctions details being AuctionDetail.jsx with having the auctions id in the URL. AuctionDetail reads this id and routes the parameters and will then call `getAuctionById()` in api/auctions.js which sends: GET /api/v1/auctions/:id. When the response arrives there user will get displayed the auctions title, description, current bid, end of the auction with a live countdown timer, and will show the input to bid and bid history.
+**Frontend:** On the Active Auctions each auction is viewed with /auctions/:id. When a user clicks and auction the react router will then navigate the user to the auctions details being AuctionDetail.jsx with having the auctions id in the URL. AuctionDetail reads this id and routes the parameters and will then call `getAuctionById()` in api/auctions.js which sends: GET /api/v1/auctions/:id. When the response arrives there user will get the display of the auctions title, description, current bid, end of the auction with a live countdown timer, and will show the input to bid and bid history.
 
-**Backend:** When the GET /api/v1/auctions/:id is sent the routes/auction.js defines it so it can read the id parameter from req.params.id then this will get called to `getAuctionById()` in services/auctions.js. This function then sends a querie to the MongoDB with the modle that will be displayed, This will be found with Auction.findById(same id that is created when a auction is started). When the auction is found the full auction document will be returned being a JSON within the response the frontend uses this to send the data needed to be filled for the frontend.
+**Backend:** When the GET /api/v1/auctions/:id is sent the routes/auction.js defines it so it can read the id parameter from req.params.id then this will get called to `getAuctionById()` in services/auctions.js. This function then sends a query to the MongoDB with the model that will be displayed, This will be found with Auction.findById(same id that is created when a auction is started). When the auction is found the full auction document will be returned being a JSON within the response the frontend uses this to send the data needed to be filled for the frontend.
 
 ### 4 Place Bids
 ---
 
 **Frontend:** User enters the amount they want to bid and will click place bid this then uses `placeBid(token, auctionId, amount) in api/auctions.js this then sends POST /api/v1/auctions/:id/bid by having the amount and the authorization that the user has enough tokens if the bid is correct then the page will refetch the auction details and bid history.
 
-**Backend:** When POST /api/v1/auctions/:id/bid that is authenticated by user is sent this will then call `placeBid(auctionID,userId,amount)` within services/auctions.js. placeBid() then hase to check the auction status being that the amount is more than the current bid, then it will have to verify that the user has enough tokens to make this bid, then the refund to the previous bidder who was higher their tokens will go back to that users account, and will then subtract from the users total. `auction.currentBid will then have to update which will save the new bid and then this returns to the frontend to update the UI and this process goes till the auction is over.
+**Backend:** When POST /api/v1/auctions/:id/bid that is authenticated by user is sent this will then call `placeBid(auctionID,userId,amount)` within services/auctions.js. placeBid() then has to check the auction status being that the amount is more than the current bid, then it will have to verify that the user has enough tokens to make this bid, then the refund to the previous bidder who was higher their tokens will go back to that users account, and will then subtract from the users total. `auction.currentBid will then have to update which will save the new bid and then this returns to the frontend to update the UI and this process goes till the auction is over.
 
 ---
 
